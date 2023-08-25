@@ -10,6 +10,16 @@ ROS2() {
     echo "ROS2 exported"
 }
 
+catkin_build_only() {
+    echo "Building only: $@"
+    catkin config --buildlist "$@" && build ; catkin config --no-buildlist
+}
+
+catkin_build_except() {
+    echo "Building all except: $@"
+    catkin config --skiplist "$@" && build ; catkin config --no-skiplist
+}
+
 paths() {
   export PATH=$1/bin:$PATH
   export CMAKE_PREFIX_PATH=$1/include:$CMAKE_PREFIX_PATH
