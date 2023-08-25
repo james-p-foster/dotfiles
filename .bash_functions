@@ -10,14 +10,26 @@ ROS2() {
     echo "ROS2 exported"
 }
 
-catkin_build_only() {
-    echo "Building only: $@"
-    catkin config --buildlist "$@" && build ; catkin config --no-buildlist
+# Assumes building all packages
+build() {
+    if [ $ROS_VERSION == 1 ]; then
+        catkin build "$@"
+    fi
+    if [ $ROS_VERSION == 2 ]; then
+        colcon build --cmake-args "$@" --event-handlers=console_direct+
+    fi
 }
 
-catkin_build_except() {
-    echo "Building all except: $@"
-    catkin config --skiplist "$@" && build ; catkin config --no-skiplist
+# Assumes cleaning all packages
+clean() {
+    if [ $ROS_VERSION == 1 ]; then
+        echo "Calling catkin clean -y..."
+        catkin clean -y
+    fi
+    if [ $ROS_VERSION == 2 ]; then
+        echo "Removing build/, install/, log/"
+        rm -r build/ install/ log/
+    fi 
 }
 
 paths() {
@@ -33,7 +45,6 @@ paths() {
   echo "Paths for $1 exported"
 }
 
-# Open a text file full of links into Firefox tabs
 firefox_open () {
     num_lines=$(sed -n '$=' $1)
     url_count=0
@@ -50,7 +61,6 @@ firefox_open () {
     echo "Opened $url_count tabs."
 }
 
-# Change screen brightness
 set_brightness() {
     brightness=$1
     if (( $(echo "$brightness > 1" | bc -l) )) || (( $(echo "$brightness < 0.2" | bc -l) ))
