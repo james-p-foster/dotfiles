@@ -45,6 +45,16 @@ paths() {
   echo "Paths for $1 exported"
 }
 
+gitprofile() {
+    # If number of arguments is 0 (no desired profile passed), then print out
+    # the local git config
+    if [ $# -eq 0 ]; then
+        echo "Local git credentials:"
+        git config user.name
+        git config user.email
+    fi
+}
+
 firefox_open () {
     num_lines=$(sed -n '$=' $1)
     url_count=0
