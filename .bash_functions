@@ -38,8 +38,8 @@ paths() {
   export LD_LIBRARY_PATH=$1/lib:$LD_LIBRARY_PATH
   export PYTHONPATH=$1/lib/python3/site-packages:$PYTHONPATH
   export PYTHONPATH=$1/lib/python3/dist-packages:$PYTHONPATH
-  export PYTHONPATH=$1/lib/python3.8/site-packages:$PYTHONPATH
-  export PYTHONPATH=$1/lib/python3.8/dist-packages:$PYTHONPATH
+  export PYTHONPATH=$1/lib/python3.10/site-packages:$PYTHONPATH
+  export PYTHONPATH=$1/lib/python3.10/dist-packages:$PYTHONPATH
   export PKG_CONFIG_PATH=$1/lib/pkgconfig:$PKG_CONFIG_PATH
   export ROS_PACKAGE_PATH=$1/share:$ROS_PACKAGE_PATH
   echo "Paths for $1 exported"
