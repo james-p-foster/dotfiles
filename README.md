@@ -19,10 +19,13 @@ fi
 1. `git clone` this repository to wherever you like, but probably your home directory.
 2. In your home directory, create symlinks to to the files in this repository so that your `~/.bashrc` can load them.
 
-For example, if we have cloned the repository to `~`, then we create symlinks for `.bash_aliases` and `.bash_functions` by doing the following:
+For example, if we have cloned the repository to `~`, then we create symlinks by doing the following:
 ```bash
 ln -s ~/dotfiles/.bash_aliases ~/.bash_aliases
 ```
 ```bash
-ln -s ~/.dotfiles/.bash_functions ~/.bash_functions
+ln -s ~/dotfiles/.bash_exports ~/.bash_exports
+```
+```bash
+ln -s ~/dotfiles/.bash_functions ~/.bash_functions
 ```
