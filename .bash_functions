@@ -54,31 +54,3 @@ gitprofile() {
         git config user.email
     fi
 }
-
-firefox_open () {
-    num_lines=$(sed -n '$=' $1)
-    url_count=0
-
-    for ((i=1; i<=num_lines; i++))
-    do
-        line=$(sed "${i}q;d" $1)
-        if [[ $line =~ .*"http://".* ]] || [[ $line =~ .*"https://".* ]]
-        then
-            firefox --new-tab $line
-            let "url_count+=1"
-        fi
-    done
-    echo "Opened $url_count tabs."
-}
-
-set_brightness() {
-    brightness=$1
-    if (( $(echo "$brightness > 1" | bc -l) )) || (( $(echo "$brightness < 0.2" | bc -l) ))
-    then
-        echo "Invalid brightness setting: pass a brightness between 0.2 and 1"
-    else
-        xrandr --output DP-0 --brightness $brightness
-        xrandr --output DP-2 --brightness $brightness
-        xrandr --output DP-4.8 --brightness $brightness
-    fi
-}
