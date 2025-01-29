@@ -1,37 +1,5 @@
 #!/usr/bin/env bash
 
-ROS1() {
-    source /opt/ros/noetic/setup.bash
-    echo "ROS1 exported"
-}
-
-ROS2() {
-    source /opt/ros/galactic/setup.bash
-    echo "ROS2 exported"
-}
-
-# Assumes building all packages
-build() {
-    if [ $ROS_VERSION == 1 ]; then
-        catkin build "$@"
-    fi
-    if [ $ROS_VERSION == 2 ]; then
-        colcon build --cmake-args "$@" --event-handlers=console_direct+
-    fi
-}
-
-# Assumes cleaning all packages
-clean() {
-    if [ $ROS_VERSION == 1 ]; then
-        echo "Calling catkin clean -y..."
-        catkin clean -y
-    fi
-    if [ $ROS_VERSION == 2 ]; then
-        echo "Removing build/, install/, log/"
-        rm -r build/ install/ log/
-    fi 
-}
-
 paths() {
   export PATH=$1/bin:$PATH
   export CMAKE_PREFIX_PATH=$1/include:$CMAKE_PREFIX_PATH
